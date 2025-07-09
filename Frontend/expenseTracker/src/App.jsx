@@ -25,7 +25,7 @@ function App() {
 export default App
 
 const Root = () => {
-  const isAuthenticate = localStorage.getItem("token")
+  const isAuthenticate = localStorage.getItem("jwt")
   return isAuthenticate ?
     ( <Navigate to="/Home" />) :  ( <Navigate to="/login" />)
 }

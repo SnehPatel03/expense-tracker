@@ -1,12 +1,37 @@
 import React, { useState } from 'react'
-import { Link, Navigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
+import axios from 'axios'
+
+
 
 function Login() {
   const [email, setemail] = useState("")
   const [password, setpassword] = useState("")
+  const navigateTo = useNavigate()
+
+
   const loginHandle = async (e) => {
     e.preventDefault()
+    try {
+      const data = await axios.post("http://localhost:3000/login", {
+        email, password
+      }, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+      )
+      alert(data.data.message || "User Login Successfully ")
+      console.log(data)
+      localStorage.setItem("jwt", data.data.token)
+      setpassword("")
+      setemail("")
+      navigateTo("/")
+    } catch (error) {
+      alert(error.response.data.message || error.message)
 
+    }
   }
 
   return (
@@ -23,6 +48,7 @@ function Login() {
               className='flex flex-col gap-2 mt-10'>
               <h4 className='text-md font-medium'>Email Address</h4>
               <input type="email"
+                placeholder='john@123.com'
                 value={email}
                 onChange={(e) => setemail(e.target.value)}
 
@@ -30,6 +56,7 @@ function Login() {
               <h4 className='text-md font-medium'>Password</h4>
               <input type="password"
                 value={password}
+                placeholder='Enter Your Password Here'
                 onChange={(e) => setpassword(e.target.value)}
                 className='w-full h-9 border-1 rounded-md py-1 px-2 text-sm md:w-[40vw]' />
               <button className=' bg-[#613AB7] hover:bg-[#38116D] duration-500 py-2 mt-7 rounded-lg text-white font-bold tracking-[3px]  md:w-[40vw]'>
@@ -43,8 +70,7 @@ function Login() {
             </form>
           </div>
         </div>
-        <div className='login lg:w-[80vw] h-screen'>
-
+        <div type="submit" className='login lg:w-[80vw] h-screen'>
         </div>
       </div>
 

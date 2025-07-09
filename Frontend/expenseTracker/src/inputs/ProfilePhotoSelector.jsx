@@ -2,8 +2,7 @@ import React, { useRef, useState } from 'react';
 import { FaUser } from 'react-icons/fa'; 
 import { MdOutlineDelete } from "react-icons/md";
 
-function ProfilePhotoSelector() {
-  const [file, setFile] = useState(null);
+function ProfilePhotoSelector({profile,setprofile}) {
   const [preview, setPreview] = useState(null);
   const fileInputRef = useRef(null); // to trigger file input when circle is clicked confused bencho
 
@@ -16,8 +15,7 @@ function ProfilePhotoSelector() {
   const handleImageChange = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile && selectedFile.type.startsWith("image/")) {
-      setFile(selectedFile);
-
+      setprofile(selectedFile);
       const reader = new FileReader();
       reader.onloadend = () => {
         setPreview(reader.result);
@@ -27,7 +25,6 @@ function ProfilePhotoSelector() {
       alert("Please select a valid image");
     }
   };
-
   const handleUpload = () => {
     if (!file) {
       alert("No file selected");
@@ -39,7 +36,7 @@ function ProfilePhotoSelector() {
 
  
   const handleRemove = () => {
-    setFile(null);
+    setprofile(null);
     setPreview(null);
   };
 
@@ -61,6 +58,7 @@ function ProfilePhotoSelector() {
       <input
         type="file"
         accept="image/*"
+        name='profile'
         ref={fileInputRef}
         onChange={handleImageChange}
         className="hidden"
@@ -70,7 +68,7 @@ function ProfilePhotoSelector() {
       className="flex gap-1 absolute top-63 left-95">
         <button
           onClick={handleRemove}
-          disabled={!file}
+          disabled={!profile}
           className="px-2 py-2 rounded-full bg-white text-black font-bold text-xl border-1 disabled:opacity-50 hover:bg-red-700 hover:text-white duration-400 hover:scale-120 "
         >
        <MdOutlineDelete/>
