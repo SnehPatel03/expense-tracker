@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import mongoose from 'mongoose'
 import cookieParser from "cookie-parser";
 import userRoutes from './Routes/userRoutes.js'
+import incomeRoutes from "./Routes/incomeRoutes.js"
 import cors from "cors"
 
 const Port = 3000 
@@ -14,6 +15,8 @@ const mongoUri = process.env.MONGODB_URI;
 
 app.use(cookieParser());
 app.use(express.json());
+
+
 app.use(
   cors({
     origin: process.env.FRONTEND_URL,
@@ -24,6 +27,7 @@ app.use(
 );
 
 app.use("/",userRoutes)
+app.use("/income",incomeRoutes)
 
 try {
     await mongoose.connect(mongoUri)

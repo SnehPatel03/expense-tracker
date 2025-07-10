@@ -63,8 +63,8 @@ export const LogIn = async (req, res) => {
     if (!user || !(await bcrypt.compare(password, user.password))) {
       res.status(400).json({ message: "Invalid Email or Password" });
     }
-    res.status(201).json({ message: "User loggedIn succesfully", user });
     const token = generateTokenAndSaveInCookies(user._id, res);
+    res.status(201).json({ message: "User loggedIn succesfully", user });
   } catch (error) {
     console.log(error);
     res.status(400).json({ message: "Error in  Log in functionality" });
