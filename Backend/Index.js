@@ -4,6 +4,8 @@ import mongoose from 'mongoose'
 import cookieParser from "cookie-parser";
 import userRoutes from './Routes/userRoutes.js'
 import incomeRoutes from "./Routes/incomeRoutes.js"
+import expenseRoutes from './Routes/expenseRoutes.js'
+import dashboardRoutes from './Routes/dashboardRoutes.js'
 import cors from "cors"
 
 const Port = 3000 
@@ -28,6 +30,8 @@ app.use(
 
 app.use("/",userRoutes)
 app.use("/income",incomeRoutes)
+app.use("/expense",expenseRoutes)
+app.use("/",dashboardRoutes)
 
 try {
     await mongoose.connect(mongoUri)

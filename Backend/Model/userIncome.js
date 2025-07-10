@@ -1,26 +1,30 @@
 import mongoose, { mongo } from "mongoose";
 
-const incomeSchema = new mongoose.Schema({
-    id :{
-         type:mongoose.Schema.Types.ObjectId,
-          ref:"User",
-          required:true
+const incomeSchema = new mongoose.Schema(
+  {
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
     },
-    icon:{
-       type:String
+    icon: {
+      type: String,
     },
-    source : {
-        type:String,
-        required:true,
+    source: {
+      type: String,
+      required: true,
     },
-    amount :{
-        type:String,
-        required:true
+    amount: {
+      type: Number,
+      required: true,
     },
-     date: {
-    type: Date, default:Date.now
+    date: {
+      type: Date,
+      default: Date.now,
+    },
   },
-},{timestamps:true})
+  { timestamps: true }
+);
 
-const Income = mongoose.model("incomeSchema", incomeSchema)
-export default Income
+const Income = mongoose.model("incomeSchema", incomeSchema);
+export default Income;
