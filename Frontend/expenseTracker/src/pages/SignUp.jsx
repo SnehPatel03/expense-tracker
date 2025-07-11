@@ -1,49 +1,58 @@
-import React, { useContext, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import ProfilePhotoSelector from '../inputs/ProfilePhotoSelector'
-import axios from 'axios'
-import { UserContext } from '../Contexts/UserContext'
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import ProfilePhotoSelector from '../inputs/ProfilePhotoSelector';
+import axios from 'axios';
+import { UserContext } from '../Contexts/UserContext';
 
 function SignUp() {
-
-  const [fullname, setfullname] = useState("")
-  const [email, setemail] = useState("")
-  const [profile, setprofile] = useState(null)
-  const [password, setpassword] = useState("")
-  const [error, seterror] = useState(null)
+  const [fullname, setfullname] = useState("");
+  const [email, setemail] = useState("");
+  const [profile, setprofile] = useState(null);
+  const [password, setpassword] = useState("");
+  const [error, seterror] = useState(null);
   const navigateTo = useNavigate();
 
-    const { updateUser } = useContext(UserContext)
-  
+  const { user, updateUser } = useContext(UserContext);
 
-  //signIn setups
+  
+  useEffect(() => {
+    if (user) {
+      console.log("Updated user from context:", user);
+    }
+  }, [user]);
+
   const signinHandle = async (e) => {
-    localStorage.clear()
+    localStorage.clear();
     e.preventDefault();
     try {
       const data = await axios.post("http://localhost:3000/signin", {
         fullname,
-        email, password,profile
+        email,
+        password,
+        profile
       }, {
         withCredentials: true,
         headers: {
           "Content-Type": "multipart/form-data"
         }
-      })
-      alert(data.message || "User registration Successfully ")
-      console.log(data)
-      updateUser(data.data.newUser)
-      
-      localStorage.setItem("jwt", data.data.token)
-      setfullname("")
-      setpassword("")
-      setemail("")
-      setprofile(null)
-      navigateTo("/")
+      });
+
+      alert(data.data.message || "User registration Successful");
+
+      updateUser(data.data.newUser); // This triggers the useEffect above
+
+      localStorage.setItem("jwt", data.data.token);
+
+      setfullname("");
+      setpassword("");
+      setemail("");
+      setprofile(null);
+
+      navigateTo("/");
     } catch (error) {
-      alert(error.response.data.message || error.response.data.error)
+      alert(error.response?.data?.message || error.response?.data?.error);
     }
-  }
+  };
 
 
 

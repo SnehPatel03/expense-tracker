@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import UserProvider, { UserContext } from '../Contexts/UserContext'
@@ -11,7 +11,14 @@ function Login() {
   const [password, setpassword] = useState("")
   const navigateTo = useNavigate()
   //comtext
-  const { updateUser } = useContext(UserContext)
+  const { user,updateUser } = useContext(UserContext)
+  
+    useEffect(() => {
+      if (user) {
+        console.log("Updated user from context:", user);
+      }
+    }, [user]);
+  
 
   const loginHandle = async (e) => {
     e.preventDefault()
@@ -29,6 +36,7 @@ function Login() {
       console.log(data)
       localStorage.setItem("jwt", data.data.token)
       updateUser(data.data.user)
+      console.log(user)
       setpassword("")
       setemail("")
       navigateTo("/")
