@@ -1,11 +1,12 @@
-import Expense from "../Model/userExpense.js"
+
 import PDFDocument from 'pdfkit';
+import Expense from '../Model/userExpense.js';
 
 export const addExpense = async (req, res) => {
   const userId = req.user.id;
 
   try {
-    const { icon, category, amount, date } = req.body;
+    const { icon,category, amount, date } = req.body;
 
     if (!category || !amount || !date) {
       res
@@ -16,7 +17,6 @@ export const addExpense = async (req, res) => {
       userId,
       category,
       amount,
-      icon,
       date: new Date(date),
     });
     await newExpense.save();
@@ -42,6 +42,7 @@ export const getAllExpense = async (req, res) => {
   }
 };
 export const deleteExpense = async (req, res) => {
+  
     try {
         await Expense.findByIdAndDelete(req.params.id)
         res.status(200).json({message:"Expense Deleted successfully"})

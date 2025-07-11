@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import ProfilePhotoSelector from '../inputs/ProfilePhotoSelector'
 import axios from 'axios'
+import { UserContext } from '../Contexts/UserContext'
 
 function SignUp() {
 
@@ -11,6 +12,9 @@ function SignUp() {
   const [password, setpassword] = useState("")
   const [error, seterror] = useState(null)
   const navigateTo = useNavigate();
+
+    const { updateUser } = useContext(UserContext)
+  
 
   //signIn setups
   const signinHandle = async (e) => {
@@ -28,6 +32,8 @@ function SignUp() {
       })
       alert(data.message || "User registration Successfully ")
       console.log(data)
+      updateUser(data.data.newUser)
+      
       localStorage.setItem("jwt", data.data.token)
       setfullname("")
       setpassword("")

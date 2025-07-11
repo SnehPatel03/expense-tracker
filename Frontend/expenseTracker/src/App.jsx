@@ -6,9 +6,11 @@ import Login from './pages/Login'
 import Expense from './pages/Expense'
 import Income from './pages/Income'
 import Home from './pages/Home'
+import UserProvider from './Contexts/UserContext'
 function App() {
 
   return (
+    <UserProvider>
     <>
       <Routes>
         <Route path='/' element={<Root/>  } />
@@ -19,6 +21,7 @@ function App() {
         <Route path='/income' element={<Income/>} />  
       </Routes>
     </>
+    </UserProvider>
   )
 }
 

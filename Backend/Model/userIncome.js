@@ -3,7 +3,7 @@ import mongoose, { mongo } from "mongoose";
 const incomeSchema = new mongoose.Schema(
   {
     userId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type:mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
@@ -26,5 +26,6 @@ const incomeSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Income = mongoose.model("incomeSchema", incomeSchema);
+const Income = mongoose.model("Income", incomeSchema, "incomes");
+
 export default Income;

@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import UserProvider, { UserContext } from '../Contexts/UserContext'
+
 
 
 
@@ -8,7 +10,8 @@ function Login() {
   const [email, setemail] = useState("")
   const [password, setpassword] = useState("")
   const navigateTo = useNavigate()
-
+  //comtext
+  const { updateUser } = useContext(UserContext)
 
   const loginHandle = async (e) => {
     e.preventDefault()
@@ -25,10 +28,12 @@ function Login() {
       alert(data.data.message || "User Login Successfully ")
       console.log(data)
       localStorage.setItem("jwt", data.data.token)
+      updateUser(data.data.user)
       setpassword("")
       setemail("")
       navigateTo("/")
     } catch (error) {
+      console.log(error)
       alert(error.response.data.message || error.message)
 
     }

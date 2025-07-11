@@ -6,20 +6,18 @@ import mongoose from "mongoose";
 const getDashboardData = async (req, res) => {
   try {
     const userId = req.user.id;
-    console.log("userId is" , userId)
-   const userObjectId = new mongoose.Types.ObjectId(userId);
-     
+   const userObjectId = new Types.ObjectId(String(userId));
+  
 
-    if (!userObjectId) {
-      return res.status(400).json({ message: "Invalid User ID" });
-    }
+    console.log(userObjectId)
 
     const totalIncome = await Income.aggregate([
       { $match: { userId: userObjectId } },
       { $group: { _id: null, total: { $sum: "$amount" } } },
     ]);
 
-    console.log("totalIncome", totalIncome);
+    // console.log("totalIncome", {totalIncome,userId:isValidObjectId(userId)});
+
     const totalExpense = await Expense.aggregate([
       { $match: { userId: userObjectId } },
       { $group: { _id: null, total: { $sum: "$amount" } } },
@@ -62,9 +60,9 @@ const getDashboardData = async (req, res) => {
       ),
     ].sort((a, b) => new Date(b.date) - new Date(a.date));
     res.json({
-      totalBalance: (totalIncome[0].total || 0) - (totalExpense[0].total || 0),
-      totalIncome: totalIncome[0].total || 0,
-      totalExpense: totalExpense[0].total || 0,
+      totalBalance: (totalIncome[0]?.total || 0) - (totalExpense[0]?.total || 0),
+      totalIncome: totalIncome[0]?.total || 0,
+      totalExpense: totalExpense[0]?.total || 0,
       last30DaysExpense: {
         total: expenseOfLast30days,
         transactions: last30daysExpenseTransaction,
