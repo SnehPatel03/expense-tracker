@@ -15,43 +15,43 @@ const userSchema = z.object({
     .min(8, { message: "Password must contain atleast 8 character" }),
 });
 
-export const signIn = async (req, res) => {
-   
-  try {
-    const { email, fullname, password } = req.body;
-    const file = req.file;  
-    if (!email || !fullname || !password) {
-      return res.status(400).json({ message: "Enter All cardentials" });
-    }
-    if (!file) {
-      return res.status(400).json({ message: "Enter Profile Avatar" });
-    }
-    const validate = userSchema.safeParse({ email, fullname, password }); // zod 
-    if (!validate.success) {
-      const errorMessage = validate.error.errors.map((err) => err.message);
-      return res.status(400).json({ error: errorMessage });
-    }
+  export const signIn = async (req, res) => {
+    
+    try {
+      const { email, fullname, password } = req.body;
+      const file = req.file;  
+      if (!email || !fullname || !password) {
+        return res.status(400).json({ message: "Enter All cardentials" });
+      }
+      if (!file) {
+        return res.status(400).json({ message: "Enter Profile Avatar" });
+      }
+      const validate = userSchema.safeParse({ email, fullname, password }); // zod 
+      if (!validate.success) {
+        const errorMessage = validate.error.errors.map((err) => err.message);
+        return res.status(400).json({ error: errorMessage });
+      }
 
-    const user = await User.findOne({ email });
-    if (user) {
-      return res.status(400).json({ message: "User Already Registred" });
-    }
-    //hashing of password
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ email, fullname,profile:file.path, password: hashedPassword });
+      const user = await User.findOne({ email });
+      if (user) {
+        return res.status(400).json({ message: "User Already Registred" });
+      }
+      //hashing of password
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const newUser = new User({ email, fullname , profile: `/upload/${file.filename}`, password: hashedPassword });
 
-    await newUser.save();
-    if (newUser) {
-      const token = await generateTokenAndSaveInCookies(newUser._id, res);
-      return res
-        .status(201)
-        .json({ message: "User Registrestion Successfully", newUser , token });
+      await newUser.save();
+      if (newUser) {
+        const token = await generateTokenAndSaveInCookies(newUser._id, res);
+        return res
+          .status(201)
+          .json({ message: "User Registrestion Successfully", newUser , token });
+      }
+    } catch (error) {
+      console.log(error);
+      res.status(400).json({ message: "Error in  SIGN IN functionality" });
     }
-  } catch (error) {
-    console.log(error);
-    res.status(400).json({ message: "Error in  SIGN IN functionality" });
-  }
-};
+  };
 export const LogIn = async (req, res) => {
   try {
     const { email, password } = req.body;

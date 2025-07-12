@@ -4,8 +4,7 @@ import { MdOutlineDelete } from "react-icons/md";
 
 function ProfilePhotoSelector({profile,setprofile}) {
   const [preview, setPreview] = useState(null);
-  const fileInputRef = useRef(null); // to trigger file input when circle is clicked confused bencho
-
+  const fileInputRef = useRef(null);
 
   const handleCircleClick = () => {
     fileInputRef.current.click();

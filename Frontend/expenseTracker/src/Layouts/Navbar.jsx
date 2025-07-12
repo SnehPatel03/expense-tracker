@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { HiOutlineMenu, HiOutlineX } from "react-icons/hi"
 import SideMenu from './SideMenu'
 function Navbar({ activeMenu }) {
-    const [openSideMenu, setOpenSideMenu] = useState(false)
+    const [openSideMenu, setOpenSideMenu] = useState(true)
     return (
-        <div className='px-3 py-4  flex gap-5 bg-white border border-b border-gray-200/50'>
+        <div className='px-3 py-4  flex gap-5 bg-white border border-b  border-gray-200/50'>
             <button
                 className='block  text-black'
                 onClick={() => setOpenSideMenu(!openSideMenu)}>
@@ -14,7 +14,7 @@ function Navbar({ activeMenu }) {
 
             {openSideMenu && (
                 <div className='fixed top-[61px] -ml-4 bg-red-white '>
-               <SideMenu activeMenu={activeMenu}/>
+                        <SideMenu activeMenu={activeMenu}/>
                 </div>
             )}
 

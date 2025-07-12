@@ -27,15 +27,13 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-
+app.use('/upload', express.static('public/upload'));
 app.use("/",userRoutes)
 app.use("/income",incomeRoutes)
 app.use("/expense",expenseRoutes)
 app.use("/",dashboardRoutes)
 
-// mongoose.connection.once("open", () => {
-//   console.log("Connected to MongoDB:", mongoose.connection.name);
-// });
+
 try {
     await mongoose.connect(mongoUri)
     console.log("database connected succesfully")
