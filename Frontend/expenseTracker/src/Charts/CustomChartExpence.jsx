@@ -29,6 +29,8 @@ function CustomChartExpence({ data = [] }) {
           <Bar
             dataKey="amount"
             radius={[10, 10, 0, 0]}
+            barSize={40}
+
           >
             {data.map((entry, index) => (
               <Cell key={index} fill={getBarColor(index)} />
