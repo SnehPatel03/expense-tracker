@@ -4,6 +4,9 @@ import IncomeOverview from '../components/Income Components/IncomeOverview'
 import axios from 'axios'
 import Model from '../components/Model'
 import AddIncomeForm from '../components/Income Components/AddIncomeForm'
+import toast from 'react-hot-toast'
+import IncomeList from '../components/Income Components/IncomeList'
+import DeleteAlert from '../components/Income Components/DeleteAlert'
 
 function Income() {
   const [incomeData, setincomeData] = useState([])
@@ -35,39 +38,75 @@ function Income() {
 
   }
   const addIncomeData = async (income) => {
-    const { source, amount, date, icon } = income
+    const { source, amount, date, icon } = income;
 
     if (!source.trim()) {
-      alert("Source Required")
-      return
+      alert("Source Required");
+      return;
     }
     if (!amount || isNaN(amount) || Number(amount) <= 0) {
-      alert("Amount should be validate number and greater than 0 ")
+      alert("Amount should be a valid number and greater than 0");
+      return;
     }
     if (!date) {
-      alert("date is required")
-      return
+      alert("Date is required");
+      return;
     }
 
     try {
-      await axios.post("http://localhost:3000/income/addIncome", {
-        withCredentials: true,
-      }, {
-        source, amount, date, icon
-      })
+      await axios.post(
+        "http://localhost:3000/income/addIncome",
+        { source, amount, date, icon },
+        { withCredentials: true }
+      );
 
-      setOpenAddIncomeModel(false)
-      alert("Income added succesfully")
+      setOpenAddIncomeModel(false);
+      toast.success("Income added successfully");
+      fetchIncomeData();
     } catch (error) {
-      console.log("error in adding income", error.response.data)
+      console.log("Error in adding income:", error.response?.data || error.message);
+      toast.error("Failed to add income");
+    }
+  };
+
+  const deleteData = async (id) => {
+
+    try {
+      await axios.delete(`http://localhost:3000/income/${id}`, {
+        withCredentials: true
+      })
+      setonDeleteAlert({ data: null, show: false })
+      toast.success("Income Deleted Successfully")
+      fetchIncomeData()
+    } catch (error) {
+      console.log("error in deleteing income", error)
+      toast.error("Error in Deleteing Income")
     }
 
-
-
   }
-  const deleteData = async (id) => { }
-  const handleDownloadIncomeDetails = async () => { }
-
+  const handleDownloadIncomeDetails = async () => { 
+    try {
+      const response = await axios.get("http://localhost:3000/income/incomePdf", {
+        responseType: "blob", 
+        withCredentials: true 
+      });
+  
+      const blob = new Blob([response.data], { type: 'application/pdf' });
+      const downloadUrl = window.URL.createObjectURL(blob);
+  
+      const link = document.createElement('a');
+      link.href = downloadUrl;
+      link.download = 'Income_Report.pdf';
+      document.body.appendChild(link);
+      link.click();
+  
+        document.body.removeChild(link);
+      window.URL.revokeObjectURL(downloadUrl);
+    } catch (error) {
+      console.error("Error downloading expense PDF:", error);
+      toast.error("Failed to download expense report");
+    }
+  }
 
 
   useEffect(() => {
@@ -86,12 +125,34 @@ function Income() {
           </div>
         </div>
       </div>
+      <div className='w-[70vw]'>
+        <IncomeList
+          transaction={incomeData}
+          onDelete={(id) => {
+            setonDeleteAlert({ show: true, data: id })
+          }}
+          onDownload={handleDownloadIncomeDetails}
+
+        />
+      </div>
       <Model
         isOpen={OpenAddIncomeModel}
         onClose={() => setOpenAddIncomeModel(false)}
         title="Add Income"
       >
         <AddIncomeForm onAddIncome={addIncomeData} />
+      </Model>
+{/* // model for delete */}
+      <Model
+        isOpen={onDeleteAlert.show}
+        onClose={() => setonDeleteAlert({
+          show: false, data: null
+        })}
+        title="Delete Income"
+      >
+        <DeleteAlert conetent="Are you sure to delete this income"
+          onDelete={() => deleteData(onDeleteAlert.data)}
+        />
       </Model>
     </DashboardLayout>
   )

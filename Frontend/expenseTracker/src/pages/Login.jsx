@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import UserProvider, { UserContext } from '../Contexts/UserContext'
+import toast from 'react-hot-toast'
 
 
 
@@ -10,6 +11,7 @@ function Login() {
   const [email, setemail] = useState("")
   const [password, setpassword] = useState("")
   const navigateTo = useNavigate()
+  
   //comtext
   const { user,updateUser } = useContext(UserContext)
   
@@ -32,7 +34,7 @@ function Login() {
         }
       }
       )
-      alert(data.data.message || "User Login Successfully ")
+      toast.success(data.data.message || "User Login Successfully ")
       console.log(data)
       localStorage.setItem("jwt", data.data.token)
       updateUser(data.data.user)
@@ -42,7 +44,7 @@ function Login() {
       navigateTo("/")
     } catch (error) {
       console.log(error)
-      alert(error.response.data.message || error.message)
+      toast.error(error.response.data.message || error.message)
 
     }
   }

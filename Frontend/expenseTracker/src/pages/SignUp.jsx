@@ -37,7 +37,7 @@ function SignUp() {
         }
       });
 
-      alert(data.data.message || "User registration Successful");
+      toast.success(data.data.message || "User registration Successful");
 
       updateUser(data.data.newUser); // This triggers the useEffect above
 
@@ -50,7 +50,7 @@ function SignUp() {
 
       navigateTo("/");
     } catch (error) {
-      alert(error.response?.data?.message || error.response?.data?.error);
+      toast.error(error.response?.data?.message || error.response?.data?.error);
     }
   };
 

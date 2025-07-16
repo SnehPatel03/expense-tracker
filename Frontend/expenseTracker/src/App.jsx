@@ -7,6 +7,8 @@ import Expense from './pages/Expense'
 import Income from './pages/Income'
 import Home from './pages/Home'
 import UserProvider from './Contexts/UserContext'
+import {Toaster} from "react-hot-toast"
+
 function App() {
 
   return (
@@ -21,6 +23,15 @@ function App() {
         <Route path='/income' element={<Income/>} />  
       </Routes>
     </>
+    <Toaster
+toastOption={{
+  className:"",
+  style:{
+    fontSize:'13px'
+  }
+}}
+
+    />
     </UserProvider>
   )
 }

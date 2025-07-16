@@ -55,3 +55,11 @@ export const prepareIncomeChart2 = (data = []) => {
   }));
   return chartData;
 };
+export const prepareExpenseChart2 = (data = []) => {
+  const chartData = data.map((item) => ({
+    month:moment(item?.date).format("Do MMM"),
+    category: item?.category,
+    amount: item?.amount,
+  }));
+  return chartData;
+};

@@ -16,9 +16,10 @@ function TransactionInfoCard({
   onDelete,
 }) {
   return (
-    <div className="flex items-center justify-between gap-4 w-[85vw] sm:w-[38.5vw] ml-2 mt-3 p-4 rounded-lg hover:bg-gray-100 shadow-sm bg-white transition">
+    <div className="flex items-center justify-between gap-4 w-full max-w-[85vw] sm:max-w-[39.5vw] ml-2 mt-3 p-4 rounded-lg hover:bg-gray-100 shadow-sm bg-white transition overflow-hidden ">
 
-      <div className="w-12 h-12 flex items-center justify-center text-xl text-gray-800 bg-gray-200 rounded-full shrink-0">
+
+      <div className="min-w-12 min-h-12 flex items-center justify-center text-xl text-gray-800 bg-gray-200 rounded-full">
         {icon ? (
           <img src={icon} alt={title} className="w-6 h-6 object-contain" />
         ) : (
@@ -26,17 +27,17 @@ function TransactionInfoCard({
         )}
       </div>
 
-      <div className="flex flex-col flex-grow overflow-hidden">
+
+      <div className="flex flex-col flex-grow min-w-0">
         <p className="text-sm font-medium text-gray-700 truncate capitalize">{title}</p>
         <p className="text-xs text-gray-500">{date}</p>
       </div>
 
-  
-      <div className="flex items-center gap-3">
+
+      <div className="flex items-center gap-3 whitespace-nowrap">
         <div
-          className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-white text-xs font-semibold ${
-            type === 'income' ? 'bg-green-500' : 'bg-red-500'
-          }`}
+          className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-white text-xs font-semibold ${type === 'income' ? 'bg-green-500' : 'bg-red-500'
+            }`}
         >
           {type === 'income' ? '+' : '-'}₹ {parseFloat(amount).toFixed(2)}
           {type === 'income' ? <LuTrendingUp /> : <LuTrendingDown />}
