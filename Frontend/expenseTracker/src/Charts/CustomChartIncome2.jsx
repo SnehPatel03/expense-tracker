@@ -19,8 +19,8 @@ function CustomChartIncome2({ data = [] }) {
   };
 
   return (
-    <div className='bg-white rounded-xl shadow-md p-4 w-[85vw] sm:w-[65vw] py-10'>
-      <ResponsiveContainer width="100%" height={400}>
+    <div className='bg-white rounded-xl shadow-md p-4  mt-5  w-[85vw] sm:w-[60vw] py-10'>
+      <ResponsiveContainer width="100%" height={330}>
         <BarChart data={data} barCategoryGap="20%">
           <defs>
             <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">

@@ -3,10 +3,13 @@ import DashboardLayout from '../Layouts/DashboardLayout'
 import IncomeOverview from '../components/Income Components/IncomeOverview'
 import axios from 'axios'
 import { data } from 'react-router-dom'
+import Model from '../components/Model'
+import AddIncomeForm from '../components/Income Components/AddIncomeForm'
 
 function Income() {
   const [incomeData, setincomeData] = useState([])
   const [loading, setloading] = useState(false)
+  const [OpenAddIncomeModel, setOpenAddIncomeModel] = useState(false)
   const [onDeleteAlert, setonDeleteAlert] = useState(
     {
       show: false,
@@ -22,13 +25,13 @@ function Income() {
       const response = await axios.get("http://localhost:3000/income/AllIncome", {
         withCredentials: true,
       })
-      
+
       if (response.data) {
         setincomeData(response.data)
       }
     } catch (error) {
       console.log("There is error in income fetching", error)
-    }finally{setloading(false)}
+    } finally { setloading(false) }
 
 
   }
@@ -36,13 +39,12 @@ function Income() {
   const deleteData = async (id) => { }
   const handleDownloadIncomeDetails = async () => { }
 
-  const [setOpenAddIncomeModel, setSetOpenAddIncomeModel] = useState(false)
 
 
   useEffect(() => {
-   fetchIncomeData()
+    fetchIncomeData()
   }, [data])
-  
+
   return (
     <DashboardLayout activeMenu={"Income"}>
       <div className='flex mt-15'>
@@ -53,8 +55,15 @@ function Income() {
               onAddIncome={() => setOpenAddIncomeModel(true)}
             />
           </div>
-        </div>
       </div>
+        </div>
+        <Model
+          isOpen={OpenAddIncomeModel}
+          onClose={() => setOpenAddIncomeModel(false)}
+          title="Add Income"
+        >
+          <AddIncomeForm  />
+        </Model>
     </DashboardLayout>
   )
 }
