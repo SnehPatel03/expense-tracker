@@ -1,3 +1,4 @@
+import moment from "moment";
 import {
   LuLayoutDashboard,
   LuHandCoins,
@@ -41,6 +42,14 @@ export const prepareDataForExpenseChart = (data = []) => {
 };
 export const prepareDataForImportChart = (data = []) => {
   const chartData = data.map((item) => ({
+    source: item?.source,
+    amount: item?.amount,
+  }));
+  return chartData;
+};
+export const prepareIncomeChart2 = (data = []) => {
+  const chartData = data.map((item) => ({
+    month:moment(item?.date).format("Do MMM"),
     source: item?.source,
     amount: item?.amount,
   }));
