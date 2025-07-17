@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import RecentTransactions from '../components/RecentTransactions';
 import FinanceOverView from '../components/FinanceOverView';
 import ExpenseTransaction from '../components/ExpenseTransaction';
-import Last30DaysExpense from '../components/last30DaysExpense';
+import Last30DaysExpense from '../components/Last30DaysExpense';
 import IncomeTransaction from '../components/IncomeTransaction';
 import Last60DaysIncome from '../components/Last60DaysIncome';
 
