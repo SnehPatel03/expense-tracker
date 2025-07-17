@@ -1,7 +1,7 @@
 
 import { z } from "zod";
 import bcrypt from "bcrypt";
-import generateTokenAndSaveInCookies from "../jwt/token.js";
+import generateTokenAndSaveInCookies from "../Jwt/token.js";
 import User from "../Model/userModel.js";
 
 const userSchema = z.object({
