@@ -64,7 +64,7 @@ function ProfilePhotoSelector({profile,setprofile}) {
       />
 {preview && (
       <div 
-      className="flex gap-1 absolute top-63 left-95">
+      className="flex gap-1 absolute top-73 left-49 sm:top-63 sm:left-95">
         <button
           onClick={handleRemove}
           disabled={!profile}

@@ -18,7 +18,7 @@ function ExpenseList({ transaction, onDelete, onDownload }) {
                     <BsDownload className='ml-3 font-bold text-lg' />
                 </button>
             </div>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-5 w-[87vw] smh:w-[68vw] ml-3'>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-3 w-[98vw] sm:w-[68vw] ml-3'>
                 {transaction?.map((expense) => (
                     <TransactionInfoCard
                         key={expense._id}

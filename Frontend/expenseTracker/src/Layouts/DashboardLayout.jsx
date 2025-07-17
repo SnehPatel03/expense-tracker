@@ -7,16 +7,18 @@ function DashboardLayout({ children, activeMenu }) {
   const { user } = useContext(UserContext);
 
   return (
-    <div className="min-h-screen">
-      <Navbar activeMenu={activeMenu} />
-      {user && (
-        <div className="flex min-w-[calc(100vh-55px)] sm:ml-64 ">
-          <div className="flex-1 p-6 pr-8 pb-10 overflow-y-auto ">
-            {children}
+    <>
+      <div className="min-h-screen  overflow-x-hidden">
+        <Navbar activeMenu={activeMenu} />
+        {user && (
+          <div className="flex min-w-[calc(100vh-55px)] sm:ml-64 ">
+            <div className="flex-1 p-3 pr-8 pb-10 overflow-y-auto ">
+              {children}
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </>
   );
 }
 

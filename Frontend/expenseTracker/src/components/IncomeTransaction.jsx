@@ -7,7 +7,7 @@ import moment from 'moment';
 
 function IncomeTransaction({ transactions = [], onseeMore }) {
   return (
-    <div className='w-full sm:w-[40vw] mt-6 ml-6'>
+    <div className='w-full sm:w-[43vw] mt-6 sm:ml-6'>
       <div className='flex justify-between text-gray-800 items-center w-[80vw] mt-4 p-3 ml-2 pr-3 h-13 bg-gray-200/55 border-gray-100 shadow-gray-400 rounded-xl sm:w-[37.7vw] sm:h-[10vh] sm:pr-2'>
         <div className='ml-1 font-semibold'>Incomes</div>
         <button

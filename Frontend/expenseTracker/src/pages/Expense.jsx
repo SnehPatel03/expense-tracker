@@ -128,7 +128,7 @@ function Expense() {
           </div>
         </div>
       </div>
-      <div className=' flex items-center w-[60vw]'>
+      <div className=' flex items-center '>
         <ExpenseList
           transaction={expenseData}
           onDelete={(id) => {

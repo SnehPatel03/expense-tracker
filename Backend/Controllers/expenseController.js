@@ -14,9 +14,11 @@ export const addExpense = async (req, res) => {
         .json({ message: "Enter All Fields of Expense Description" });
     }
     const newExpense = new Expense({
+
       userId,
       category,
       amount,
+      icon,
       date: new Date(date),
     });
     await newExpense.save();

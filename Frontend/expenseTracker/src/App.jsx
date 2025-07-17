@@ -8,6 +8,7 @@ import Income from './pages/Income'
 import Home from './pages/Home'
 import UserProvider from './Contexts/UserContext'
 import {Toaster} from "react-hot-toast"
+import NoFound from './pages/NoFound'
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
         <Route path='/login' element={<Login/>} />
         <Route path='/expense' element={<Expense/>} />
         <Route path='/income' element={<Income/>} />  
+        <Route path='/*' element={<NoFound/>} />  
       </Routes>
     </>
     <Toaster

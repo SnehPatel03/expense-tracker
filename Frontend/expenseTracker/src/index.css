@@ -5,6 +5,7 @@ body {
   font-weight: 400;
   font-style: normal;
   background-color: #fafafc;
+  overflow-x: hidden;
 }
 
 .poppins-medium {
@@ -13,13 +14,13 @@ body {
   font-style: normal;
 }
 .login {
-  background-image: url("/undraw_finance_m6vw.svg");
-  background-size: 40vw;
+  background-image: url("/woman-laptop-chart-dark.png");
+  background-size: 27vw;
   background-position: center;
   background-repeat: no-repeat;
 }
 .signin1 {
-  background-image: url(/signin2.svg);
+  background-image: url(/smartphone-charts-dar.png);
   background-size: 30vw;
   background-position: 150px;
   background-repeat: no-repeat;

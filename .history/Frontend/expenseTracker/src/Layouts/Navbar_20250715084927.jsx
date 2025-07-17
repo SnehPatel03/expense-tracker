@@ -10,7 +10,7 @@ function Navbar({ activeMenu }) {
                 onClick={() => setOpenSideMenu(!openSideMenu)}>
                 {(openSideMenu ? (<HiOutlineX />) : (<HiOutlineMenu />))}
             </button>
-            <h2 className='text-lg font-semibold text-black '>Expense Tracker</h2>
+            <h2 className='text-lg font-semibold text-black '>ByteBudget</h2>
 
             {openSideMenu && (
                 <div className='fixed top-[61px] -ml-4 bg-red-white '>

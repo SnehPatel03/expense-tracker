@@ -92,7 +92,7 @@ function Home() {
         />
       </div>
 
-      <div className='    flex flex-col lg:flex-row'>
+      <div className='flex flex-col lg:flex-row'>
         <Last60DaysIncome
         data={dashboardData?.last60DaysIncome.transactions}
         />

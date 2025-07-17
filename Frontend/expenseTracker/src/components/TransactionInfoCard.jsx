@@ -29,12 +29,21 @@ function TransactionInfoCard({
 
 
       <div className="flex flex-col flex-grow min-w-0">
-        <p className="text-sm font-medium text-gray-700 truncate capitalize">{title}</p>
-        <p className="text-xs text-gray-500">{date}</p>
+        <p className="text-[12px] sm:text-sm font-medium text-gray-700 truncate capitalize">{title}</p>
+        <p className="text-[12px] sm:text-xs text-gray-500">{date}</p>
       </div>
 
 
       <div className="flex items-center gap-3 whitespace-nowrap">
+          {!hideDeleteBtn && (
+          <button
+            onClick={onDelete}
+            className="text-gray-700 sm:text-transparent hover:text-red-500 duration-500 rounded-full p-1 sm:border-1 hover:border-red-500"
+            aria-label="Delete Transaction"
+          >
+            <LuTrash2 size={18} />
+          </button>
+        )}
         <div
           className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-white text-xs font-semibold ${type === 'income' ? 'bg-green-500' : 'bg-red-500'
             }`}
@@ -43,15 +52,7 @@ function TransactionInfoCard({
           {type === 'income' ? <LuTrendingUp /> : <LuTrendingDown />}
         </div>
 
-        {!hideDeleteBtn && (
-          <button
-            onClick={onDelete}
-            className="text-gray-500 hover:text-red-500 transition-colors"
-            aria-label="Delete Transaction"
-          >
-            <LuTrash2 size={18} />
-          </button>
-        )}
+      
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import ProfilePhotoSelector from '../inputs/ProfilePhotoSelector';
 import axios from 'axios';
 import { UserContext } from '../Contexts/UserContext';
+import toast from 'react-hot-toast';
 
 function SignUp() {
   const [fullname, setfullname] = useState("");
@@ -58,9 +59,9 @@ function SignUp() {
 
   return (
     <>
-      <div className='w-full h-screen flex md:pl-10'>
+      <div className='w-[98vw]  ml-2 sm:w-full h-screen flex md:pl-10'>
         <div className='w-full sm:w-[60vw] h-screen py-7 px-4 flex flex-col '>
-          <h2 className='font-semibold '>Expense Tracker</h2>
+          <h2 className='font-semibold '>ByteBudget</h2>
           <div className=' md:h-[65vh] w-full py-5 px-4 flex flex-col gap-2'>
             <h3 className='font-bold text-xl tracking-wide'>Create an Account</h3>
             <h5 className='text-[5vw] font-semibold tracking-wide
@@ -73,7 +74,7 @@ function SignUp() {
               <div className='flex gap-3'>
                 <div className='w-[50%] flex flex-col gap-2'> <h4 className='text-md font-medium'>Full Name</h4>
                   <input
-                    placeholder='Enter a Full Name Here'
+                    placeholder='Enter Full Name'
                     type="text"
                     value={fullname}
                     onChange={(e) => setfullname(e.target.value)}
@@ -81,7 +82,7 @@ function SignUp() {
                 <div className='w-[50%] flex flex-col gap-2'>
                   <h4 className='text-md font-medium'>Email Address</h4>
                   <input
-                    placeholder='example@gmail.com'
+                    placeholder='ex@gmail.com'
                     type="email"
                     value={email}
                     onChange={(e) => setemail(e.target.value)}

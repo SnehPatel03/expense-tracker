@@ -53,7 +53,7 @@ function Login() {
     <>
       <div className='w-full h-screen flex md:pl-10'>
         <div className='w-full sm:w-[50vw] h-screen py-7 px-4 flex flex-col gap-16 '>
-          <h2 className='font-semibold '>Expense Tracker</h2>
+          <h2 className='font-semibold '>ByteBudget</h2>
           <div className=' md:h-[65vh] w-full py-5 px-4 flex flex-col gap-2'>
             <h3 className='font-bold text-xl tracking-wide'>Welcome Back</h3>
             <h5 className='text-[5vw] font-semibold md:text-sm'>Please Enter Your Details to Log In </h5>

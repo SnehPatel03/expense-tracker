@@ -3,6 +3,7 @@ import User from "../Model/userModel.js";
 
 export const authorize = async (req, res, next) => {
   const token = req.cookies.jwt;
+  // console.log("token",token)
   if (!token) {
     return res.status(400).json({ message: "Unauhtrize" });
   }
