@@ -26,7 +26,7 @@ function SignUp() {
     localStorage.clear();
     e.preventDefault();
     try {
-      const data = await axios.post("http://localhost:3000/signin", {
+      const data = await axios.post("https://expense-tracker-backend-jkhf.onrender.com/signin", {
         fullname,
         email,
         password,
@@ -40,8 +40,7 @@ function SignUp() {
 
       toast.success(data.data.message || "User registration Successful");
 
-      updateUser(data.data.newUser); // This triggers the useEffect above
-
+      updateUser(data.data.newUser); 
       localStorage.setItem("jwt", data.data.token);
 
       setfullname("");

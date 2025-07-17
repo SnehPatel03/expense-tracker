@@ -25,7 +25,7 @@ function Login() {
   const loginHandle = async (e) => {
     e.preventDefault()
     try {
-      const data = await axios.post("http://localhost:3000/login", {
+      const data = await axios.post("https://expense-tracker-backend-jkhf.onrender.com/login", {
         email, password
       }, {
         withCredentials: true,

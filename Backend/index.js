@@ -10,7 +10,7 @@ import cors from "cors"
 
 const Port = 3000 
 const app = express()
-//hyy
+
 dotenv.config()
 
 const mongoUri = process.env.MONGODB_URI;

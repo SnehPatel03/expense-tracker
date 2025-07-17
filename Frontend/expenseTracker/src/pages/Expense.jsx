@@ -26,7 +26,7 @@ function Expense() {
 
     setloading(true)
     try {
-      const response = await axios.get("http://localhost:3000/expense/AllExpense", {
+      const response = await axios.get("https://expense-tracker-backend-jkhf.onrender.com/expense/AllExpense", {
         withCredentials: true,
       })
 
@@ -57,7 +57,7 @@ function Expense() {
 
     try {
       await axios.post(
-        "http://localhost:3000/expense/addexpense",
+        "https://expense-tracker-backend-jkhf.onrender.com/expense/addexpense",
         { category, amount, date, icon },
         { withCredentials: true }
       );
@@ -74,7 +74,7 @@ function Expense() {
   const deleteData = async (id) => {
 
     try {
-      await axios.delete(`http://localhost:3000/expense/${id}`, {
+      await axios.delete(`https://expense-tracker-backend-jkhf.onrender.com/expense/${id}`, {
         withCredentials: true
       })
       setonDeleteAlert({ data: null, show: false })
@@ -88,7 +88,7 @@ function Expense() {
   }
   const handleDownloadExpenseDetails = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/expense/expensePdf", {
+      const response = await axios.get("https://expense-tracker-backend-jkhf.onrender.com/expense/expensePdf", {
         responseType: "blob", // important for binary data like PDF
         withCredentials: true // if your route needs auth cookies
       });

@@ -24,7 +24,7 @@ function Income() {
 
     setloading(true)
     try {
-      const response = await axios.get("http://localhost:3000/income/AllIncome", {
+      const response = await axios.get("https://expense-tracker-backend-jkhf.onrender.com/income/AllIncome", {
         withCredentials: true,
       })
 
@@ -55,7 +55,7 @@ function Income() {
 
     try {
       await axios.post(
-        "http://localhost:3000/income/addIncome",
+        "https://expense-tracker-backend-jkhf.onrender.com/income/addIncome",
         { source, amount, date, icon },
         { withCredentials: true }
       );
@@ -72,7 +72,7 @@ function Income() {
   const deleteData = async (id) => {
 
     try {
-      await axios.delete(`http://localhost:3000/income/${id}`, {
+      await axios.delete(`https://expense-tracker-backend-jkhf.onrender.com/income/${id}`, {
         withCredentials: true
       })
       setonDeleteAlert({ data: null, show: false })
@@ -86,7 +86,7 @@ function Income() {
   }
   const handleDownloadIncomeDetails = async () => { 
     try {
-      const response = await axios.get("http://localhost:3000/income/incomePdf", {
+      const response = await axios.get("https://expense-tracker-backend-jkhf.onrender.com/income/incomePdf", {
         responseType: "blob", 
         withCredentials: true 
       });
