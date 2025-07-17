@@ -21,7 +21,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
+    origin: 'https://687947251092554411d64a3c--bytesbudget.netlify.app',
     credentials: true,
     methods: "GET,POST,DELETE,PUT",
     allowedHeaders: ["Content-Type", "Authorization"],
