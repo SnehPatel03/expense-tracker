@@ -10,9 +10,9 @@ import cors from "cors"
 
 const Port = 3000 
 const app = express()
-
+//hyy
 dotenv.config()
-// database configration
+
 const mongoUri = process.env.MONGODB_URI;
 
 app.use(cookieParser());

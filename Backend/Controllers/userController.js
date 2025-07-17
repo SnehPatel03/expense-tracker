@@ -36,7 +36,7 @@ const userSchema = z.object({
       if (user) {
         return res.status(400).json({ message: "User Already Registred" });
       }
-      //hashing of password
+     
       const hashedPassword = await bcrypt.hash(password, 10);
       const newUser = new User({ email, fullname , profile: `/upload/${file.filename}`, password: hashedPassword });
 
