@@ -20,7 +20,11 @@ function Home() {
   const navigateTo = useNavigate()
 
   const fetchDashboardData = async () => {
-    if (loading) return;
+    if (loading) return
+    <div className="flex justify-center items-center h-screen">
+      <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-purple-600"></div>
+    </div>
+      ;
     setLoading(true);
     try {
       const data = await axios.get("https://expense-tracker-backend-jkhf.onrender.com/", {
@@ -88,13 +92,13 @@ function Home() {
           }
         />
         <Last30DaysExpense
-        data={dashboardData?.last30DaysExpense.transactions}
+          data={dashboardData?.last30DaysExpense.transactions}
         />
       </div>
 
       <div className='flex flex-col lg:flex-row'>
         <Last60DaysIncome
-        data={dashboardData?.last60DaysIncome.transactions}
+          data={dashboardData?.last60DaysIncome.transactions}
         />
         <IncomeTransaction
           transactions={dashboardData?.last60DaysIncome.transactions}
@@ -103,7 +107,7 @@ function Home() {
           }
         />
       </div>
-        
+
 
 
     </DashboardLayout>
