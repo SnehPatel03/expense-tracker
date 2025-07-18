@@ -41,5 +41,5 @@ toastOption={{
 export default App
 
 const Root = () => {
-  <Navigate to="/login" />
-}
+  return <Navigate to="/login" />;
+};

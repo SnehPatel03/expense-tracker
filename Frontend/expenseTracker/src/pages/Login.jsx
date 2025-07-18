@@ -41,7 +41,7 @@ function Login() {
       console.log(user)
       setpassword("")
       setemail("")
-      navigateTo("/")
+      navigateTo("/home")
     } catch (error) {
       console.log(error)
       toast.error(error.response.data.message || error.message)
