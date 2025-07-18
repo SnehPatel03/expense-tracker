@@ -48,7 +48,7 @@ function SignUp() {
       setemail("");
       setprofile(null);
 
-      navigateTo("/");
+      navigateTo("/home");
     } catch (error) {
       toast.error(error.response?.data?.message || error.response?.data?.error);
     }
