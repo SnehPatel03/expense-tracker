@@ -23,7 +23,7 @@ function Navbar({ activeMenu }) {
         className={`
           fixed top-[61px] left-0 h-screen w-64 z-40 bg-white shadow-lg
           transition-transform duration-300 ease-in-out
-          ${openSideMenu ? 'translate-x-0' : '-translate-x-full'}
+          ${openSideMenu ? '-translate-x-30' : '-translate-x-full'}
         `}
       >
         <SideMenu activeMenu={activeMenu} />
