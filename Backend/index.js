@@ -21,7 +21,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: 'https://687947251092554411d64a3c--bytesbudget.netlify.app',
+    origin: 'https://expense-tracker-frontend-bmpg.onrender.com',
     credentials: true,
     methods: "GET,POST,DELETE,PUT",
     allowedHeaders: ["Content-Type", "Authorization"],
