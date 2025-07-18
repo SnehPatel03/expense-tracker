@@ -19,7 +19,7 @@ function Navbar({ activeMenu }) {
       </div>
 
 
-      <div
+          <div
         className={`
           fixed top-[61px] left-0 h-screen w-64 z-40 bg-white shadow-lg
           transition-transform duration-300 ease-in-out
