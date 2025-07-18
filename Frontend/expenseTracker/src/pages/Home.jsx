@@ -28,7 +28,9 @@ function Home() {
       if (data.data) {
         setDashboardData(data.data);
       }
-    } catch (error) {
+    } 
+    
+    catch (error) {
       console.log(error);
       console.log("Something went wrong in fetch of dashboard");
     } finally {
