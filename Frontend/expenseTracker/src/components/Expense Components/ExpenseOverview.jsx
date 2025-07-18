@@ -4,7 +4,7 @@ import { prepareExpenseChart2 } from '../../data';
 import CustomChartIncome2 from '../../Charts/CustomChartIncome2';
 import CustomChartExpense2 from '../../Charts/CustomChartExpense2';
 
-function ExpenseOverview({ transaction, onAddExpense }) {
+function ExpenseOverview({ transaction, onAddExpense,onExpenseLimit }) {
   const [chartData, setchartData] = useState([]);
 
   useEffect(() => {
@@ -23,6 +23,13 @@ function ExpenseOverview({ transaction, onAddExpense }) {
           </p>
         </div>
 
+        <button
+          onClick={onExpenseLimit}
+          className="mt-4 sm:mt-0 flex items-center justify-center bg-gray-100 text-sm sm:text-[0.9vw] font-bold tracking-wide hover:text-purple-700 hover:bg-purple-200 border border-gray-300 rounded-xl px-4 py-2 transition-all"
+        >
+          ADD EXPENSE LIMIT
+          <LuPlus className="ml-2 text-base" />
+        </button>
         <button
           onClick={onAddExpense}
           className="mt-4 sm:mt-0 flex items-center justify-center bg-gray-100 text-sm sm:text-[0.9vw] font-bold tracking-wide hover:text-purple-700 hover:bg-purple-200 border border-gray-300 rounded-xl px-4 py-2 transition-all"

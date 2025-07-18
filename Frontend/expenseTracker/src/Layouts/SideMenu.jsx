@@ -27,7 +27,7 @@ function SideMenu({ activeMenu }) {
       
       {user?.profile && (
         <img
-          src={`https://expense-tracker-backend-jkhf.onrender.com${user?.profile}`}
+          src={`http://localhost:3000${user?.profile}`}
           alt="Profile"
           className="w-30 h-30 rounded-full object-cover border border-gray-300 shadow-md"
         />
