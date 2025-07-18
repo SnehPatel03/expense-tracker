@@ -21,8 +21,7 @@ function App() {
         <Route path='/signin' element={<SignUp/>} />
         <Route path='/login' element={<Login/>} />
         <Route path='/expense' element={<Expense/>} />
-        <Route path='/income' element={<Income/>} />  
-        <Route path='/*' element={<NoFound/>} />  
+        <Route path='/income' element={<Income/>} /> 
       </Routes>
     </>
     <Toaster

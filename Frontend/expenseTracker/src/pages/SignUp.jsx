@@ -18,7 +18,7 @@ function SignUp() {
   
   useEffect(() => {
     if (user) {
-      console.log("Updated user from context:", user);
+      console.log("Updated user from context:", user);  
     }
   }, [user]);
 
