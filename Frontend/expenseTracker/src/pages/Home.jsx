@@ -13,18 +13,13 @@ import Last30DaysExpense from '../components/Last30DaysExpense';
 import IncomeTransaction from '../components/IncomeTransaction';
 import Last60DaysIncome from '../components/Last60DaysIncome';
 
-
 function Home() {
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const navigateTo = useNavigate()
+  const navigateTo = useNavigate();
 
   const fetchDashboardData = async () => {
-    if (loading) return
-    <div className="flex justify-center items-center h-screen">
-      <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-purple-600"></div>
-    </div>
-      
+    if (loading) return;
     setLoading(true);
     try {
       const data = await axios.get("https://expense-tracker-backend-jkhf.onrender.com/", {
@@ -45,10 +40,20 @@ function Home() {
     fetchDashboardData();
   }, []);
 
+
+  if (loading || !dashboardData) {
+    return (
+      <div className="flex flex-col justify-center items-center h-screen gap-4">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-purple-600"></div>
+        <p className="text-gray-600 font-medium text-lg">Loading Dashboard...</p>
+      </div>
+    );
+  }
+
   return (
-    <DashboardLayout activeMenu="Dashboard" >
+    <DashboardLayout activeMenu="Dashboard">
       <div className='flex mt-15'>
-        <div className="p-2  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+        <div className="p-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
           <Card
             label="Balance"
             value={dashboardData?.totalBalance || 0}
@@ -68,15 +73,12 @@ function Home() {
             color="red"
           />
         </div>
-        <div>
-        </div>
       </div>
-      <div className='flex flex-col mt-3 md:flex-row  md:justify-center md: gap-8'>
+
+      <div className='flex flex-col mt-3 md:flex-row md:justify-center md:gap-8'>
         <RecentTransactions
           transactions={dashboardData?.recentTransactions}
-          onseeMore={
-            () => navigateTo("/expense")
-          }
+          onseeMore={() => navigateTo("/expense")}
         />
         <FinanceOverView
           totalBalance={dashboardData?.totalBalance || 0}
@@ -84,12 +86,11 @@ function Home() {
           totalExpense={dashboardData?.totalExpense || 0}
         />
       </div>
+
       <div className='mt-10 flex flex-col lg:flex-row'>
         <ExpenseTransaction
           transactions={dashboardData?.last30DaysExpense.transactions}
-          onseeMore={
-            () => navigateTo("/expense")
-          }
+          onseeMore={() => navigateTo("/expense")}
         />
         <Last30DaysExpense
           data={dashboardData?.last30DaysExpense.transactions}
@@ -102,14 +103,9 @@ function Home() {
         />
         <IncomeTransaction
           transactions={dashboardData?.last60DaysIncome.transactions}
-          onseeMore={
-            () => navigateTo("/income")
-          }
+          onseeMore={() => navigateTo("/income")}
         />
       </div>
-
-
-
     </DashboardLayout>
   );
 }

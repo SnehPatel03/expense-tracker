@@ -34,8 +34,15 @@ function Income() {
     } catch (error) {
       console.log("There is error in income fetching", error)
     } finally { setloading(false) }
+  }
 
-
+    if (loading || !incomeData) {
+    return (
+      <div className="flex flex-col justify-center items-center h-screen gap-4">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-purple-600"></div>
+        <p className="text-gray-600 font-medium text-lg">Loading Income...</p>
+      </div>
+    );
   }
   const addIncomeData = async (income) => {
     const { source, amount, date, icon } = income;
@@ -68,6 +75,9 @@ function Income() {
       toast.error("Failed to add income");
     }
   };
+
+
+
 
   const deleteData = async (id) => {
 
