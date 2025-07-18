@@ -41,7 +41,5 @@ toastOption={{
 export default App
 
 const Root = () => {
-  const isAuthenticate = localStorage.getItem("jwt")
-  return isAuthenticate ?
-    ( <Navigate to="/Home" />) :  ( <Navigate to="/login" />)
+  <Navigate to="/login" />
 }
