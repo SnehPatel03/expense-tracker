@@ -160,7 +160,7 @@ function Income() {
 
   useEffect(() => {
     if (IncomeGoal != null && totalIncome != null) {
-      if (totalIncome >= IncomeGoal) {
+      if (totalIncome > IncomeGoal) {
         console.log("🎉 You've achive Your monthly Income Goal")
         setgoal("Congrats!!! 🎉 You've achive Your Monthly Income Goal");
       }
