@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import DashboardLayout from '../Layouts/DashboardLayout';
 import axios from 'axios';
 import Card from '../components/Card';
@@ -12,19 +12,22 @@ import ExpenseTransaction from '../components/ExpenseTransaction';
 import Last30DaysExpense from '../components/Last30DaysExpense';
 import IncomeTransaction from '../components/IncomeTransaction';
 import Last60DaysIncome from '../components/Last60DaysIncome';
+import { WarningOfLimit } from '../Contexts/WarningOfLimit';
 
 
 function Home() {
+  const [warning, setwarning] = useContext(WarningOfLimit)
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigateTo = useNavigate()
+
 
   const fetchDashboardData = async () => {
     if (loading) return
     <div className="flex justify-center items-center h-screen">
       <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-purple-600"></div>
     </div>
-      
+
     setLoading(true);
     try {
       const data = await axios.get("http://localhost:3000/", {
@@ -48,6 +51,13 @@ function Home() {
   return (
     <DashboardLayout activeMenu="Dashboard" >
       <div className='flex mt-15'>
+        <div>
+          {warning && (
+            <h2 className="fixed w-[125vw] top-17 left-1/2 sm:top-17 sm:left-190 transform -translate-x-1/2 bg-red-50/70 backdrop-blur-sm text-red-700 text-sm px-4 py-2 rounded-md shadow-md z-10 transition-all duration-300 ease-linear font-semibold flex items-center justify-center">
+              {warning}
+            </h2>
+          )}
+        </div>
         <div className="p-2  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
           <Card
             label="Balance"

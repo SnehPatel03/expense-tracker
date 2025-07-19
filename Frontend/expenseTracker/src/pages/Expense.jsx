@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import DashboardLayout from '../Layouts/DashboardLayout'
-import IncomeOverview from '../components/Income Components/IncomeOverview'
 import axios from 'axios'
 import Model from '../components/Model'
 import toast from 'react-hot-toast'
-import IncomeList from '../components/Income Components/IncomeList'
 import DeleteAlert from '../components/Income Components/DeleteAlert'
 import AddExpenseForm from '../components/Expense Components/AddExenseForm'
 import ExpenseOverview from '../components/Expense Components/ExpenseOverview'
 import ExpenseList from '../components/Expense Components/ExpenseList'
 import AddExpenseLimit from '../components/Expense Components/AddExpenseLimit'
+import { WarningOfLimit } from '../Contexts/WarningOfLimit'
+import { useNavigate } from 'react-router-dom'
 
 function Expense() {
   const [expenseData, setexpenseData] = useState([])
@@ -18,7 +18,7 @@ function Expense() {
   const [ExpenseLimitModel, setExpenseLimitModel] = useState(false)
   const [expenseLimitData, setExpenseLimitData] = useState(null);
   const [dashboardData, setdashboardData] = useState([])
-  const [warning, setwarning] = useState("")
+  const [warning, setwarning] = useContext(WarningOfLimit)
   const [onDeleteAlert, setonDeleteAlert] = useState(
     {
       show: false,
@@ -26,6 +26,7 @@ function Expense() {
     }
   )
 
+ 
   const fetchExpenseData = async () => {
     if (loading) return
 
@@ -159,8 +160,8 @@ function Expense() {
   useEffect(() => {
     if (expenseLimitData != null && totalExpense != null) {
       if (totalExpense > expenseLimitData) {
-        setwarning("⚠️ You've crossed your Monthly Expense Limit!");
-      } 
+        setwarning("👀 You've crossed your Monthly Expense Limit!");
+      }
     }
   }, [expenseLimitData, totalExpense]);
 
@@ -219,12 +220,10 @@ function Expense() {
           <div >
             <div>
               {warning && (
-                <h2 className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-yellow-50 text-purple-700 text-sm px-4 py-2 rounded-md shadow-md z-40 transition-all duration-300 ease-in-out">
+                <h2 className="fixed w-[135vw] top-17 left-1/2 sm:top-17 sm:left-190 transform -translate-x-1/2 bg-red-50/70 backdrop-blur-sm text-red-700 text-sm px-4 py-2 rounded-md shadow-md z-10 transition-all duration-300 ease-linear font-semibold flex items-center justify-center">
                   {warning}
                 </h2>
               )}
-
-
             </div>
             <ExpenseOverview
               transaction={expenseData}

@@ -2,8 +2,12 @@ import React, { useContext } from 'react';
 import { SIDE_MENU_DATA } from '../data';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../Contexts/UserContext';
+import { SideMenuContext } from '../Contexts/SideMenuContext';
+
+
 
 function SideMenu({ activeMenu }) {
+  const { setOpenSideMenu } = useContext(SideMenuContext);
   const { user, clearUser } = useContext(UserContext);
   const navigateTo = useNavigate();
   
@@ -19,6 +23,7 @@ function SideMenu({ activeMenu }) {
       handleLogOut();
     } else {
       navigateTo(route);
+       setOpenSideMenu(false);
     }
   };
 

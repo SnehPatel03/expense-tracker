@@ -14,6 +14,9 @@ function Income() {
   const [loading, setloading] = useState(false)
   const [OpenAddIncomeModel, setOpenAddIncomeModel] = useState(false)
   const [IncomeGoalModel, setIncomeGoalModel] = useState(false)
+  const [dashboardData, setdashboardData] = useState([])
+  const [IncomeGoal, setIncomeGoal] = useState("")
+  const [goal, setgoal] = useState("")
   const [onDeleteAlert, setonDeleteAlert] = useState(
     {
       show: false,
@@ -37,6 +40,28 @@ function Income() {
       console.log("There is error in income fetching", error)
     } finally { setloading(false) }
   }
+
+  //Dashboard Data
+  const fetchDashboardData = async () => {
+
+    try {
+      const data = await axios.get("http://localhost:3000/", {
+        withCredentials: true,
+      });
+
+      if (data.data) {
+        setdashboardData(data.data);
+      }
+    } catch (error) {
+      console.log(error);
+      console.log("Something went wrong in fetch of dashboard");
+    }
+  };
+
+  useEffect(() => {
+    fetchDashboardData();
+  }, []);
+  //Dashboard data end
 
 
   const addIncomeData = async (income) => {
@@ -71,6 +96,10 @@ function Income() {
     }
   };
 
+
+  const totalIncome = dashboardData.totalIncome
+  console.log(totalIncome)
+
   //goal
   const addGoal = async ({ incomeGoal, month, year }) => {
     if (!incomeGoal) {
@@ -102,6 +131,43 @@ function Income() {
       toast.error("Failed to set income goal");
     }
   };
+
+
+
+  useEffect(() => {
+    const fetchIncomeGoal = async () => {
+      const currentMonth = new Date().getMonth() + 1;
+      const currentYear = new Date().getFullYear();
+
+      try {
+        const res = await axios.get(
+          `http://localhost:3000/goal/get?month=${currentMonth}&year=${currentYear}`,
+          { withCredentials: true }
+        );
+        console.log("fetchingIncomeGoal", res);
+        setIncomeGoal(res.data.goal.incomeGoal);
+        console.log("res.data.goal.incomeGoal", res.data.goal.incomeGoal)
+      } catch (err) {
+        console.log("Error fetching INcome Goal", err.response?.data);
+      }
+    };
+
+    fetchIncomeGoal();
+  }, []);
+
+  console.log("totalIncome", totalIncome)
+  console.log("IncomeGoal",IncomeGoal)
+
+  useEffect(() => {
+    if (IncomeGoal != null && totalIncome != null) {
+      if (totalIncome >= IncomeGoal) {
+        console.log("🎉 You've achive Your monthly Income Goal")
+        setgoal("Congrats!!! 🎉 You've achive Your Monthly Income Goal");
+      }
+    }
+  }, [IncomeGoal, totalIncome]);
+
+
 
 
   const deleteData = async (id) => {
@@ -153,6 +219,13 @@ function Income() {
       <div className='flex mt-15'>
         <div className='grid grid-cols-1 gap-6'>
           <div >
+             <div>
+              {goal && (
+                <h2 className="fixed w-[100vw] sm:w-[125vw] top-16 left-1/2 sm:top-17 sm:left-190 transform -translate-x-1/2 bg-blue-50/70 backdrop-blur-sm text-blue-700 text-sm px-4 py-2 rounded-md shadow-md z-10 transition-all duration-300 ease-linear font-medium flex items-center justify-center text-center">
+                  {goal}
+                </h2>
+              )}
+            </div>
             <IncomeOverview
               transaction={incomeData}
               onAddIncome={() => setOpenAddIncomeModel(true)}
