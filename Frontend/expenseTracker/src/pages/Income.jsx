@@ -151,7 +151,7 @@ function Income() {
   }, []);
 
   console.log("totalIncome", totalIncome)
-  console.log("IncomeGoal",IncomeGoal)
+  console.log("IncomeGoal", IncomeGoal)
 
   useEffect(() => {
     if (IncomeGoal != 0 && totalIncome != null) {
@@ -206,14 +206,33 @@ function Income() {
     fetchIncomeData()
   }, [])
 
+
+
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+
+    const timeout = setTimeout(() => setVisible(true), 100);
+    return () => clearTimeout(timeout);
+  }, []);
+
   return (
     <DashboardLayout activeMenu={"Income"}>
       <div className='flex mt-15'>
         <div className='grid grid-cols-1 gap-6'>
           <div >
-             <div>
+            <div>
               {goal && (
-                <h2 className="fixed w-[100vw] sm:w-[125vw] top-16 left-1/2 sm:top-17 sm:left-190 transform -translate-x-1/2 bg-blue-50/70 backdrop-blur-sm text-blue-700 text-sm px-4 py-2 rounded-md shadow-md z-10 transition-all duration-300 ease-linear font-medium flex items-center justify-center text-center">
+                <h2
+                  className={`
+        fixed w-[100vw] sm:w-[125vw] top-16 left-1/2 transform -translate-x-1/2
+        bg-blue-50/70 backdrop-blur-sm text-blue-700 text-sm px-4 py-2 rounded-md shadow-md z-10 
+        font-medium flex items-center justify-center text-center
+
+        transition-all duration-700 ease-out
+        ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-5'}
+      `}
+                >
                   {goal}
                 </h2>
               )}
