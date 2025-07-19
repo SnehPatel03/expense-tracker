@@ -30,7 +30,7 @@ function Home() {
 
     setLoading(true);
     try {
-      const data = await axios.get("http://localhost:3000/", {
+      const data = await axios.get("https://expense-tracker-backend-jkhf.onrender.com/", {
         withCredentials: true,
       });
       if (data.data) {

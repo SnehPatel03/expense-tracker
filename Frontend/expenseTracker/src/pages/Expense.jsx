@@ -32,7 +32,7 @@ function Expense() {
 
     setloading(true)
     try {
-      const response = await axios.get("http://localhost:3000/expense/AllExpense", {
+      const response = await axios.get("https://expense-tracker-backend-jkhf.onrender.com/expense/AllExpense", {
         withCredentials: true,
       })
 
@@ -48,7 +48,7 @@ function Expense() {
   const fetchDashboardData = async () => {
 
     try {
-      const data = await axios.get("http://localhost:3000/", {
+      const data = await axios.get("https://expense-tracker-backend-jkhf.onrender.com/", {
         withCredentials: true,
       });
 
@@ -88,7 +88,7 @@ function Expense() {
 
     try {
       await axios.post(
-        "http://localhost:3000/expense/addexpense",
+        "https://expense-tracker-backend-jkhf.onrender.com/expense/addexpense",
         { category, amount, date, icon },
         { withCredentials: true }
       );
@@ -117,7 +117,7 @@ function Expense() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/goal/set",
+        "https://expense-tracker-backend-jkhf.onrender.com/goal/set",
         { expenseLimit: Number(expenseLimit), month, year },
         {
           withCredentials: true
@@ -141,7 +141,7 @@ function Expense() {
 
       try {
         const res = await axios.get(
-          `http://localhost:3000/goal/get?month=${currentMonth}&year=${currentYear}`,
+          `https://expense-tracker-backend-jkhf.onrender.com/goal/get?month=${currentMonth}&year=${currentYear}`,
           { withCredentials: true }
         );
         console.log("fetchingDataOfLimitexpense", res);
@@ -171,7 +171,7 @@ function Expense() {
   const deleteData = async (id) => {
 
     try {
-      await axios.delete(`http://localhost:3000/expense/${id}`, {
+      await axios.delete(`https://expense-tracker-backend-jkhf.onrender.com/expense/${id}`, {
         withCredentials: true
       })
       setonDeleteAlert({ data: null, show: false })
@@ -185,7 +185,7 @@ function Expense() {
   }
   const handleDownloadExpenseDetails = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/expense/expensePdf", {
+      const response = await axios.get("https://expense-tracker-backend-jkhf.onrender.com/expense/expensePdf", {
         responseType: "blob", // important for binary data like PDF
         withCredentials: true // if your route needs auth cookies
       });

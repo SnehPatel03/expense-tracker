@@ -29,7 +29,7 @@ function Income() {
 
     setloading(true)
     try {
-      const response = await axios.get("http://localhost:3000/income/AllIncome", {
+      const response = await axios.get("https://expense-tracker-backend-jkhf.onrender.com/income/AllIncome", {
         withCredentials: true,
       })
 
@@ -45,7 +45,7 @@ function Income() {
   const fetchDashboardData = async () => {
 
     try {
-      const data = await axios.get("http://localhost:3000/", {
+      const data = await axios.get("https://expense-tracker-backend-jkhf.onrender.com/", {
         withCredentials: true,
       });
 
@@ -82,7 +82,7 @@ function Income() {
 
     try {
       await axios.post(
-        "http://localhost:3000/income/addIncome",
+        "https://expense-tracker-backend-jkhf.onrender.com/income/addIncome",
         { source, amount, date, icon },
         { withCredentials: true }
       );
@@ -116,7 +116,7 @@ function Income() {
 
 
       const response = await axios.post(
-        "http://localhost:3000/goal/set",
+        "https://expense-tracker-backend-jkhf.onrender.com/goal/set",
         { incomeGoal: Number(incomeGoal), month, year },
         {
           withCredentials: true
@@ -141,7 +141,7 @@ function Income() {
 
       try {
         const res = await axios.get(
-          `http://localhost:3000/goal/get?month=${currentMonth}&year=${currentYear}`,
+          `https://expense-tracker-backend-jkhf.onrender.com/goal/get?month=${currentMonth}&year=${currentYear}`,
           { withCredentials: true }
         );
         console.log("fetchingIncomeGoal", res);
@@ -173,7 +173,7 @@ function Income() {
   const deleteData = async (id) => {
 
     try {
-      await axios.delete(`http://localhost:3000/income/${id}`, {
+      await axios.delete(`https://expense-tracker-backend-jkhf.onrender.com/income/${id}`, {
         withCredentials: true
       })
       setonDeleteAlert({ data: null, show: false })
@@ -187,7 +187,7 @@ function Income() {
   }
   const handleDownloadIncomeDetails = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/income/incomePdf", {
+      const response = await axios.get("https://expense-tracker-backend-jkhf.onrender.com/income/incomePdf", {
         responseType: "blob",
         withCredentials: true
       });

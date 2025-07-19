@@ -26,7 +26,7 @@ function SignUp() {
     localStorage.clear();
     e.preventDefault();
     try {
-      const data = await axios.post("http://localhost:3000/signin", {
+      const data = await axios.post("https://expense-tracker-backend-jkhf.onrender.com/signin", {
         fullname,
         email,
         password,
