@@ -9,7 +9,6 @@ import ExpenseOverview from '../components/Expense Components/ExpenseOverview'
 import ExpenseList from '../components/Expense Components/ExpenseList'
 import AddExpenseLimit from '../components/Expense Components/AddExpenseLimit'
 import { WarningOfLimit } from '../Contexts/WarningOfLimit'
-import { useNavigate } from 'react-router-dom'
 
 function Expense() {
   const [expenseData, setexpenseData] = useState([])
@@ -166,8 +165,6 @@ function Expense() {
   }, [expenseLimitData, totalExpense]);
 
 
-
-
   const deleteData = async (id) => {
 
     try {
@@ -186,8 +183,8 @@ function Expense() {
   const handleDownloadExpenseDetails = async () => {
     try {
       const response = await axios.get("https://expense-tracker-backend-jkhf.onrender.com/expense/expensePdf", {
-        responseType: "blob", // important for binary data like PDF
-        withCredentials: true // if your route needs auth cookies
+        responseType: "blob", 
+        withCredentials: true 
       });
 
       const blob = new Blob([response.data], { type: 'application/pdf' });

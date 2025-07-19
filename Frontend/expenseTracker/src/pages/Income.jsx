@@ -61,7 +61,7 @@ function Income() {
   useEffect(() => {
     fetchDashboardData();
   }, []);
-  //Dashboard data end
+  //Dashboard data End
 
 
   const addIncomeData = async (income) => {
@@ -96,7 +96,6 @@ function Income() {
     }
   };
 
-
   const totalIncome = dashboardData.totalIncome
   console.log(totalIncome)
 
@@ -113,8 +112,6 @@ function Income() {
     }
 
     try {
-
-
       const response = await axios.post(
         "https://expense-tracker-backend-jkhf.onrender.com/goal/set",
         { incomeGoal: Number(incomeGoal), month, year },
@@ -131,8 +128,6 @@ function Income() {
       toast.error("Failed to set income goal");
     }
   };
-
-
 
   useEffect(() => {
     const fetchIncomeGoal = async () => {
@@ -159,16 +154,13 @@ function Income() {
   console.log("IncomeGoal",IncomeGoal)
 
   useEffect(() => {
-    if (IncomeGoal != null && totalIncome != null) {
-      if (totalIncome >= IncomeGoal) {
+    if (IncomeGoal != 0 && totalIncome != null) {
+      if (totalIncome > IncomeGoal) {
         console.log("🎉 You've achive Your monthly Income Goal")
         setgoal("Congrats!!! 🎉 You've achive Your Monthly Income Goal");
       }
     }
   }, [IncomeGoal, totalIncome]);
-
-
-
 
   const deleteData = async (id) => {
 
