@@ -21,8 +21,8 @@ app.use(express.json());
 
 app.use(
   cors({
-    // origin: 'https://expense-tracker-frontend-bmpg.onrender.com',
-    origin: "http://localhost:5173",
+
+    origin: "https://expense-tracker-frontend-bmpg.onrender.com",
     credentials: true,
     methods: "GET,POST,DELETE,PUT",
     allowedHeaders: ["Content-Type", "Authorization"],
