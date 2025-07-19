@@ -158,7 +158,7 @@ function Expense() {
   console.log("totalExpense", totalExpense)
 
   useEffect(() => {
-    if (expenseLimitData != null && totalExpense != null) {
+    if (expenseLimitData != 0 && totalExpense != 0) {
       if (totalExpense > expenseLimitData) {
         setwarning("👀 You've crossed your Monthly Expense Limit!");
       }
