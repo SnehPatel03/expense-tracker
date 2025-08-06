@@ -8,9 +8,9 @@ import Income from './pages/Income'
 import Home from './pages/Home'
 import UserProvider from './Contexts/UserContext'
 import { Toaster } from "react-hot-toast"
-import NoFound from './pages/NoFound'
 import { SideMenuProvider } from './Contexts/SideMenuContext'
 import { WarningProvider } from './Contexts/WarningOfLimit'
+import NoPageFound from './pages/NoPageFound'
 
 function App() {
 
@@ -26,6 +26,8 @@ function App() {
               <Route path='/login' element={<Login />} />
               <Route path='/expense' element={<Expense />} />
               <Route path='/income' element={<Income />} />
+              <Route path='*' element={<NoPageFound />} />
+
             </Routes>
           </>
           <Toaster
@@ -46,5 +48,10 @@ function App() {
 export default App
 
 const Root = () => {
-  return <Navigate to="/login" />;
+  const isAuthenticated = !!localStorage.getItem("token");
+  return isAuthenticated ? (
+    <Navigate to="/dashboard" />
+  ) : (
+    <Navigate to="/login" />
+  );
 };
