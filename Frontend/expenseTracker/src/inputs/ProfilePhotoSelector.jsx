@@ -67,7 +67,7 @@ function ProfilePhotoSelector({ profile, setprofile }) {
       />
 
       {preview && (
-        <div className="flex gap-1 absolute top-[115px] left-[350px]">
+        <div className="flex gap-1 absolute top-[115px] left-[300px]">
           <button
             onClick={handleRemove}
             className="px-2 py-2 rounded-full bg-white text-black text-xl hover:bg-red-700 hover:text-white transition-all"
